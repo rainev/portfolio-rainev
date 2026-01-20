@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { portfolioData } from "@/content/portfolio";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 type Props = {
@@ -12,10 +11,10 @@ type Props = {
 export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
 
-  const project = portfolioData.projects.find((p) => p.slug === slug);
-  if (!project) return notFound();
+  const item = portfolioData.projects.find((x) => x.slug === slug);
+  if (!item) return notFound();
 
-  const c = project.content;
+  const c = item.content;
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-12 space-y-8">
@@ -24,37 +23,82 @@ export default async function ProjectDetailPage({ params }: Props) {
           ← Back
         </Link>
 
-        <h1 className="text-3xl font-bold">{project.title}</h1>
-        {project.subtitle ? (
-          <p className="text-muted-foreground">{project.subtitle}</p>
+        <h1 className="text-3xl font-bold">{item.title}</h1>
+        {item.subtitle ? <p className="text-muted-foreground">{item.subtitle}</p> : null}
+
+        {/* Links */}
+        {item.links?.length ? (
+          <div className="flex flex-wrap gap-2 pt-2">
+            {item.links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                target="_blank"
+                rel="noreferrer"
+                className="
+                  inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm
+                  font-medium text-foreground shadow-sm
+                  hover:bg-accent hover:text-accent-foreground transition
+                "
+              >
+                <span className="text-base">{l.emoji ?? "🔗"}</span>
+                <span>{l.label}</span>
+                <span className="text-muted-foreground">↗</span>
+              </a>
+            ))}
+          </div>
         ) : null}
 
-        <div className="flex flex-wrap gap-2 pt-2">
-          {project.tags.map((t) => (
+        {/* Tags */}
+        {/* <div className="flex flex-wrap gap-2 pt-2">
+          {item.tags.map((t) => (
             <Badge key={t} variant="secondary">
               {t}
             </Badge>
           ))}
-        </div>
-
-        {/* Links */}
-        {project.links?.length ? (
-          <div className="flex flex-wrap gap-3 pt-2">
-            {project.links.map((l) => (
-              <Button key={l.href} variant="outline" asChild>
-                <a href={l.href} target="_blank" rel="noreferrer">
-                  {l.emoji ? <span className="mr-2">{l.emoji}</span> : null}
-                  {l.label}
-                </a>
-              </Button>
-            ))}
-          </div>
-        ) : null}
+        </div> */}
       </div>
 
       <Separator />
 
-      {/* Overview */}
+      {c?.tech?.length ? (
+        <section className="space-y-2">
+          <h2 className="text-xl font-semibold">Tech</h2>
+          <div className="flex flex-wrap gap-2">
+            {c.tech.map((t) => (
+              <Badge key={t} variant="outline">
+                {t}
+              </Badge>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* Role & Timeline */}
+      {c?.role || c?.timeline ? (
+        <section className="grid gap-2 sm:grid-cols-2">
+          {c?.role ? (
+            <div className="space-y-1">
+              <h2 className="text-sm font-semibold">Role</h2>
+              <p className="text-muted-foreground">{c.role}</p>
+            </div>
+          ) : null}
+          {c?.timeline ? (
+            <div className="space-y-1">
+              <h2 className="text-sm font-semibold">Timeline</h2>
+              <p className="text-muted-foreground">{c.timeline}</p>
+            </div>
+          ) : null}
+        </section>
+      ) : null}
+
+      {c?.impact ? (
+        <section className="space-y-2">
+          <h2 className="text-xl font-semibold">Impact</h2>
+          <p className="text-muted-foreground">{c.impact}</p>
+        </section>
+      ) : null}
+
       {c?.overview ? (
         <section className="space-y-2">
           <h2 className="text-xl font-semibold">Overview</h2>
@@ -62,7 +106,6 @@ export default async function ProjectDetailPage({ params }: Props) {
         </section>
       ) : null}
 
-      {/* Highlights */}
       {c?.highlights?.length ? (
         <section className="space-y-2">
           <h2 className="text-xl font-semibold">Highlights</h2>
@@ -74,15 +117,25 @@ export default async function ProjectDetailPage({ params }: Props) {
         </section>
       ) : null}
 
-      {/* Tech */}
-      {c?.tech?.length ? (
+      {c?.challenges?.length ? (
         <section className="space-y-2">
-          <h2 className="text-xl font-semibold">Tech Stack</h2>
-          <div className="flex flex-wrap gap-2">
-            {c.tech.map((x) => (
-              <Badge key={x}>{x}</Badge>
+          <h2 className="text-xl font-semibold">Challenges</h2>
+          <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+            {c.challenges.map((x) => (
+              <li key={x}>{x}</li>
             ))}
-          </div>
+          </ul>
+        </section>
+      ) : null}
+
+      {c?.learnings?.length ? (
+        <section className="space-y-2">
+          <h2 className="text-xl font-semibold">Learnings</h2>
+          <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+            {c.learnings.map((x) => (
+              <li key={x}>{x}</li>
+            ))}
+          </ul>
         </section>
       ) : null}
     </main>
