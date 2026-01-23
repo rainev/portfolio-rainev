@@ -90,7 +90,7 @@ export const portfolioData: PortfolioContent = {
       },
       {
         label: "Frameworks/Tools",
-        items: ["React", "Node.js", "Express.js", "NestJS", "Docker"],
+        items: ["React", "Node.js", "Express.js", "NestJS", "Docker", "Kafka", "Vite", "Next.js", "Tailwind CSS"],
       },
       {
         label: "Databases",
@@ -129,7 +129,7 @@ export const portfolioData: PortfolioContent = {
         src: "/images/me.jpg",
         alt: "Portrait of Raine Villaver",
         },
-        about: "A **forward-thinking builder** who leads with a **help-first principle**—transforming problems into **actionable strategies** through **empathy**, **technical skill**, and **creative thinking**. Thrives in **collaborative environments** focused on **iterative learning** and **honest feedback**, with a strong ability to identify **pain points**, define **core problems**, and craft **practical**, **people-centered solutions**.",
+        about: "A **forward-thinking builder** who leads with a **help-first mindset**, turning complex problems into practical, **people-centered solutions** through empathy, technical skill, and creative thinking. Thrives in **collaborative teams** that value iteration, clarity, and honest feedback.",
         socials: [
         { label: "GitHub", href: "https://github.com/rainev", emoji: "💻" },
         { label: "LinkedIn", href: "https://www.linkedin.com/in/raine-villaver-51195a314", emoji: "🔗" },
@@ -438,5 +438,48 @@ export const portfolioData: PortfolioContent = {
           ],
         },
       },
+
+      {
+        slug: "kafka-message-streaming-demo",
+        title: "Kafka Producer & Consumer Demo",
+        subtitle: "A simple event-streaming prototype using Kafka topics for message publishing and consumption.",
+        description: [
+          "Built a Kafka producer that publishes messages to a topic and a consumer that subscribes and processes them.",
+          "Demonstrated event-driven communication and pub/sub messaging fundamentals using Kafka.",
+          "Implemented a lightweight streaming flow to simulate real-time message delivery and processing.",
+        ],
+        tags: ["Kafka", "Event Streaming", "Producer/Consumer", "Messaging Systems"],
+        links: [
+          { label: "GitHub Repo", href: "https://github.com/rainev/kafka-message-streaming-demo", emoji: "📦" },
+        ],
+        featured: false,
+        content: {
+          impact: "Demonstrated foundational knowledge of event-driven architectures by implementing a working Kafka message pipeline.",
+          overview:
+            "This mini-project explores Apache Kafka fundamentals by implementing a producer that sends messages into a Kafka topic and a consumer that reads and processes those messages. It showcases how distributed systems can communicate asynchronously through event streams.",
+          highlights: [
+            "Kafka producer publishes events/messages to a topic",
+            "Kafka consumer subscribes to the topic and processes incoming messages",
+            "Demonstrates pub/sub workflow and asynchronous message handling",
+          ],
+          tech: [
+            "Apache Kafka",
+            "Producer API",
+            "Consumer API",
+            "Topic-based pub/sub messaging",
+          ],
+          role: "Developer (Solo Project)",
+          timeline: "2024",
+          challenges: [
+            "Understanding Kafka concepts such as brokers, topics, partitions, and offsets",
+            "Ensuring correct producer → topic → consumer message flow",
+          ],
+          learnings: [
+            "How Kafka enables asynchronous communication through event streams",
+            "Core producer/consumer workflow and topic-based messaging design",
+            "Practical understanding of messaging fundamentals used in distributed systems",
+          ],
+        },
+      }
     ],
 };

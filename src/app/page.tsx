@@ -64,13 +64,13 @@ export default function Home() {
       {/* EXPERTISE */}
       <section className="space-y-6">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="text-2xl font-semibold">Professional Expertise</h2>
+          <h2 className="text-2xl font-semibold">Professional Experience</h2>
           {/* <Link href="/expertise" className="text-sm text-muted-foreground hover:underline">
             View all →
           </Link> */}
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-5">
           {professionalExpertise.map((item) => (
             <ShowcaseCard
               key={item.slug}
